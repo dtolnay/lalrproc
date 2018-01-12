@@ -1,0 +1,14 @@
+[package]
+name = "lalrproc"
+version = "0.1.0"
+authors = ["David Tolnay <dtolnay@gmail.com>"]
+build = "build.rs"
+
+[lib]
+proc-macro = true
+
+[build-dependencies]
+lalrpop = "0.13"
+
+[dependencies]
+lalrpop-util = "0.13"
