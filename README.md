@@ -82,7 +82,7 @@ error: failed to parse macro input
    |                         ^
    |
    = note: unrecognized token `:`
-   = note: expected one of `(`, identifier or literal
+   = note: expected one of `(`, identifier, or literal
 ```
 
 ## License

@@ -60,7 +60,7 @@ impl<'a> Display for Expected<'a> {
             }
             for (i, e) in self.0.iter().enumerate() {
                 if i == self.0.len() - 1 {
-                    formatter.write_str(" or ")?;
+                    formatter.write_str(", or ")?;
                 } else if i > 0 {
                     formatter.write_str(", ")?;
                 }
