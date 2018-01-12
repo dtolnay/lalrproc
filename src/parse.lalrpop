@@ -6,6 +6,35 @@ use proc_macro::Literal;
 
 grammar;
 
+extern {
+    type Error = NoUserError;
+    type Location = Span;
+
+    enum Token {
+        // The delimiters needed by our grammar
+        "(" => Token::Open(::proc_macro::Delimiter::Parenthesis),
+        ")" => Token::Close(::proc_macro::Delimiter::Parenthesis),
+
+        // The punctuation needed by our grammar
+        "+" => Token::Op('+'),
+        "-" => Token::Op('-'),
+        "*" => Token::Op('*'),
+        "/" => Token::Op('/'),
+        "&" => Token::Op('&'),
+        ":" => Token::Op(':'),
+        Op => Token::Op(<char>),
+        Joint => Token::Joint,
+
+        // The keywords needed by our grammar
+        "mut" => Token::Keyword(::token::Keyword::Mut),
+
+        // Other terminals in the grammar
+        BasicIdent => Token::Ident(<::proc_macro::Term>),
+        BasicLifetime => Token::Lifetime(<::proc_macro::Term>),
+        Literal => Token::Literal(<Literal>),
+    }
+}
+
 pub Type: Box<Type> = {
     Path => Box::new(Type::Path(<>)),
     Reference => Box::new(Type::Reference(<>)),
@@ -61,85 +90,3 @@ Ident: Ident = {
 Lifetime: Lifetime = {
     <span:@L> <term:BasicLifetime> => Lifetime {<>}
 };
-
-extern {
-    type Error = NoUserError;
-    type Location = Span;
-
-    enum Token {
-        "(" => Token::Open(::proc_macro::Delimiter::Parenthesis),
-        ")" => Token::Close(::proc_macro::Delimiter::Parenthesis),
-        "{" => Token::Open(::proc_macro::Delimiter::Brace),
-        "}" => Token::Close(::proc_macro::Delimiter::Brace),
-        "[" => Token::Open(::proc_macro::Delimiter::Bracket),
-        "]" => Token::Close(::proc_macro::Delimiter::Bracket),
-        OpenNone => Token::Open(::proc_macro::Delimiter::None),
-        CloseNone => Token::Close(::proc_macro::Delimiter::None),
-
-        "+" => Token::Op('+'),
-        "-" => Token::Op('-'),
-        "*" => Token::Op('*'),
-        "/" => Token::Op('/'),
-        "&" => Token::Op('&'),
-        ":" => Token::Op(':'),
-        Op => Token::Op(<char>),
-        Joint => Token::Joint,
-
-        "abstract" => Token::Keyword(::token::Keyword::Abstract),
-        "alignof" => Token::Keyword(::token::Keyword::Alignof),
-        "as" => Token::Keyword(::token::Keyword::As),
-        "become" => Token::Keyword(::token::Keyword::Become),
-        "box" => Token::Keyword(::token::Keyword::Box),
-        "break" => Token::Keyword(::token::Keyword::Break),
-        "const" => Token::Keyword(::token::Keyword::Const),
-        "continue" => Token::Keyword(::token::Keyword::Continue),
-        "crate" => Token::Keyword(::token::Keyword::Crate),
-        "do" => Token::Keyword(::token::Keyword::Do),
-        "else" => Token::Keyword(::token::Keyword::Else),
-        "enum" => Token::Keyword(::token::Keyword::Enum),
-        "extern" => Token::Keyword(::token::Keyword::Extern),
-        "false" => Token::Keyword(::token::Keyword::False),
-        "final" => Token::Keyword(::token::Keyword::Final),
-        "fn" => Token::Keyword(::token::Keyword::Fn),
-        "for" => Token::Keyword(::token::Keyword::For),
-        "if" => Token::Keyword(::token::Keyword::If),
-        "impl" => Token::Keyword(::token::Keyword::Impl),
-        "in" => Token::Keyword(::token::Keyword::In),
-        "let" => Token::Keyword(::token::Keyword::Let),
-        "loop" => Token::Keyword(::token::Keyword::Loop),
-        "macro" => Token::Keyword(::token::Keyword::Macro),
-        "match" => Token::Keyword(::token::Keyword::Match),
-        "mod" => Token::Keyword(::token::Keyword::Mod),
-        "move" => Token::Keyword(::token::Keyword::Move),
-        "mut" => Token::Keyword(::token::Keyword::Mut),
-        "offsetof" => Token::Keyword(::token::Keyword::Offsetof),
-        "override" => Token::Keyword(::token::Keyword::Override),
-        "priv" => Token::Keyword(::token::Keyword::Priv),
-        "proc" => Token::Keyword(::token::Keyword::Proc),
-        "pub" => Token::Keyword(::token::Keyword::Pub),
-        "pure" => Token::Keyword(::token::Keyword::Pure),
-        "ref" => Token::Keyword(::token::Keyword::Ref),
-        "return" => Token::Keyword(::token::Keyword::Return),
-        "Self" => Token::Keyword(::token::Keyword::UpperSelf),
-        "self" => Token::Keyword(::token::Keyword::LowerSelf),
-        "sizeof" => Token::Keyword(::token::Keyword::Sizeof),
-        "static" => Token::Keyword(::token::Keyword::Static),
-        "struct" => Token::Keyword(::token::Keyword::Struct),
-        "super" => Token::Keyword(::token::Keyword::Super),
-        "trait" => Token::Keyword(::token::Keyword::Trait),
-        "true" => Token::Keyword(::token::Keyword::True),
-        "type" => Token::Keyword(::token::Keyword::Type),
-        "typeof" => Token::Keyword(::token::Keyword::Typeof),
-        "unsafe" => Token::Keyword(::token::Keyword::Unsafe),
-        "unsized" => Token::Keyword(::token::Keyword::Unsized),
-        "use" => Token::Keyword(::token::Keyword::Use),
-        "virtual" => Token::Keyword(::token::Keyword::Virtual),
-        "where" => Token::Keyword(::token::Keyword::Where),
-        "while" => Token::Keyword(::token::Keyword::While),
-        "yield" => Token::Keyword(::token::Keyword::Yield),
-
-        BasicIdent => Token::Ident(<::proc_macro::Term>),
-        BasicLifetime => Token::Lifetime(<::proc_macro::Term>),
-        Literal => Token::Literal(<Literal>),
-    }
-}
