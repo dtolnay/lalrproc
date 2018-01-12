@@ -1,7 +1,11 @@
 [package]
 name = "lalrproc"
-version = "0.1.0"
+version = "0.0.1"
 authors = ["David Tolnay <dtolnay@gmail.com>"]
+license = "MIT/Apache-2.0"
+description = "Procedural macro built on LALRPOP"
+repository = "https://github.com/dtolnay/lalrproc"
+documentation = "https://github.com/dtolnay/lalrproc"
 build = "build.rs"
 
 [lib]
