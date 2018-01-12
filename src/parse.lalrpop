@@ -82,6 +82,7 @@ extern {
         "/" => Token::Op('/'),
         "&" => Token::Op('&'),
         ":" => Token::Op(':'),
+        Op => Token::Op(<char>),
         Joint => Token::Joint,
 
         "abstract" => Token::Keyword(::token::Keyword::Abstract),
