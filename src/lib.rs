@@ -18,10 +18,11 @@ use lalrpop_util::ParseError;
 use span::Span;
 use token::Token;
 use error::NoUserError;
+use parse::{TypeParser, ExprParser};
 
 #[proc_macro]
 pub fn s_type(input: TokenStream) -> TokenStream {
-    match parse::parse_Type(Cursor::new(input)) {
+    match TypeParser::new().parse(Cursor::new(input)) {
         Ok(t) => string_literal(&t.to_string()),
         Err(err) => parse_error(err),
     }
@@ -29,7 +30,7 @@ pub fn s_type(input: TokenStream) -> TokenStream {
 
 #[proc_macro]
 pub fn s_expr(input: TokenStream) -> TokenStream {
-    match parse::parse_Expr(Cursor::new(input)) {
+    match ExprParser::new().parse(Cursor::new(input)) {
         Ok(e) => string_literal(&e.to_string()),
         Err(err) => parse_error(err),
     }

@@ -12,7 +12,7 @@ build = "build.rs"
 proc-macro = true
 
 [build-dependencies]
-lalrpop = "0.13"
+lalrpop = "0.15"
 
 [dependencies]
-lalrpop-util = "0.13"
+lalrpop-util = "0.15"
