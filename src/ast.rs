@@ -4,7 +4,7 @@ use span::Span;
 #[derive(Debug)]
 pub enum Type {
     Path(Path),
-    Reference(Reference)
+    Reference(Reference),
 }
 
 #[derive(Debug)]

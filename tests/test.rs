@@ -1,11 +1,14 @@
 #![feature(proc_macro)]
 
 extern crate lalrproc;
-use lalrproc::{s_type, s_expr};
+use lalrproc::{s_expr, s_type};
 
 #[test]
 fn test_s_type() {
-    assert_eq!("(Reference 'a mut (Path module T))", s_type!(&'a mut module::T));
+    assert_eq!(
+        "(Reference 'a mut (Path module T))",
+        s_type!(&'a mut module::T)
+    );
 }
 
 #[test]

@@ -1,7 +1,7 @@
-use proc_macro::{self, TokenStream, TokenTree, Term, Spacing, Delimiter};
 use proc_macro::token_stream::IntoIter as TokenIter;
-use token::{Token, Keyword};
+use proc_macro::{self, Delimiter, Spacing, Term, TokenStream, TokenTree};
 use span::Span;
+use token::{Keyword, Token};
 
 pub struct Cursor {
     stack: Vec<Frame>,
@@ -62,7 +62,7 @@ impl Iterator for Cursor {
                 None
             } else {
                 Some((top.span, Token::Close(top.delimiter), top.span))
-            }
+            },
         }
     }
 }
@@ -125,6 +125,6 @@ fn term_to_token(term: Term) -> Token {
             Token::Lifetime(term)
         } else {
             Token::Ident(term)
-        }
+        },
     }
 }

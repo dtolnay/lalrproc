@@ -1,7 +1,7 @@
 #![feature(proc_macro)]
 
-extern crate proc_macro;
 extern crate lalrpop_util;
+extern crate proc_macro;
 
 mod ast;
 mod cursor;
@@ -11,14 +11,14 @@ mod sexpr;
 mod span;
 mod token;
 
-use proc_macro::{TokenStream, Literal, TokenTree, Group, Delimiter};
 use cursor::Cursor;
-use std::iter::{self, FromIterator};
-use lalrpop_util::ParseError;
-use span::Span;
-use token::Token;
 use error::NoUserError;
-use parse::{TypeParser, ExprParser};
+use lalrpop_util::ParseError;
+use parse::{ExprParser, TypeParser};
+use proc_macro::{Delimiter, Group, Literal, TokenStream, TokenTree};
+use span::Span;
+use std::iter::{self, FromIterator};
+use token::Token;
 
 #[proc_macro]
 pub fn s_type(input: TokenStream) -> TokenStream {

@@ -1,4 +1,4 @@
-use proc_macro::{Term, Literal, Delimiter};
+use proc_macro::{Delimiter, Literal, Term};
 use std::fmt::{self, Display};
 
 #[derive(Debug)]

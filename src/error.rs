@@ -1,8 +1,8 @@
-use std::fmt::{self, Display};
 use lalrpop_util::ParseError;
-use span::Span;
-use token::Token;
 use proc_macro;
+use span::Span;
+use std::fmt::{self, Display};
+use token::Token;
 
 pub enum NoUserError {}
 
@@ -15,19 +15,27 @@ impl Display for NoUserError {
 pub fn emit(err: ParseError<Span, Token, NoUserError>) {
     match err {
         ParseError::InvalidToken { location: span } => {
-            span.0.error("failed to parse macro input")
+            span.0
+                .error("failed to parse macro input")
                 .note("invalid token")
                 .emit();
         }
-        ParseError::UnrecognizedToken { token: Some((span, token, _)), expected } => {
-            let mut diagnostic = span.0.error("failed to parse macro input")
+        ParseError::UnrecognizedToken {
+            token: Some((span, token, _)),
+            expected,
+        } => {
+            let mut diagnostic = span.0
+                .error("failed to parse macro input")
                 .note(format!("unrecognized token {}", token));
             if !expected.is_empty() {
                 diagnostic = diagnostic.note(Expected(&expected).to_string());
             }
             diagnostic.emit();
         }
-        ParseError::UnrecognizedToken { token: None, expected } => {
+        ParseError::UnrecognizedToken {
+            token: None,
+            expected,
+        } => {
             let span = proc_macro::Span::call_site();
             let mut diagnostic = span.error("failed to parse macro input")
                 .note("unexpected EOF");
@@ -36,12 +44,15 @@ pub fn emit(err: ParseError<Span, Token, NoUserError>) {
             }
             diagnostic.emit();
         }
-        ParseError::ExtraToken { token: (span, token, _) } => {
-            span.0.error("failed to parse macro input")
+        ParseError::ExtraToken {
+            token: (span, token, _),
+        } => {
+            span.0
+                .error("failed to parse macro input")
                 .note(format!("extra token {}", token))
                 .emit();
         }
-        ParseError::User { error } => match error {}
+        ParseError::User { error } => match error {},
     }
 }
 
@@ -79,8 +90,10 @@ impl<'a> Display for GrammarRule<'a> {
             "BasicIdent" => formatter.write_str("identifier"),
             "BasicLifetime" => formatter.write_str("lifetime"),
             "Literal" => formatter.write_str("literal"),
-            s =>  {
-                if s.len() > 2 && s.starts_with('"') && s.ends_with('"') && !s[1..s.len() - 1].contains('"') {
+            s => {
+                if s.len() > 2 && s.starts_with('"') && s.ends_with('"')
+                    && !s[1..s.len() - 1].contains('"')
+                {
                     write!(formatter, "`{}`", &s[1..s.len() - 1])
                 } else {
                     s.fmt(formatter)
