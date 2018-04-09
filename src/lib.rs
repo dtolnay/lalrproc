@@ -11,7 +11,7 @@ mod sexpr;
 mod span;
 mod token;
 
-use proc_macro::{TokenStream, Literal, TokenTree, TokenNode, Delimiter};
+use proc_macro::{TokenStream, Literal, TokenTree, Group, Delimiter};
 use cursor::Cursor;
 use std::iter::{self, FromIterator};
 use lalrpop_util::ParseError;
@@ -36,16 +36,12 @@ pub fn s_expr(input: TokenStream) -> TokenStream {
 }
 
 fn string_literal(s: &str) -> TokenStream {
-    TokenStream::from_iter(iter::once(TokenTree {
-        span: proc_macro::Span::call_site(),
-        kind: TokenNode::Literal(Literal::string(s)),
-    }))
+    let lit = Literal::string(s);
+    TokenStream::from_iter(iter::once(TokenTree::Literal(lit)))
 }
 
 fn parse_error(err: ParseError<Span, Token, NoUserError>) -> TokenStream {
     error::emit(err);
-    TokenStream::from_iter(iter::once(TokenTree {
-        span: proc_macro::Span::call_site(),
-        kind: TokenNode::Group(Delimiter::Brace, TokenStream::empty()),
-    }))
+    let group = Group::new(Delimiter::Brace, TokenStream::empty());
+    TokenStream::from_iter(iter::once(TokenTree::Group(group)))
 }

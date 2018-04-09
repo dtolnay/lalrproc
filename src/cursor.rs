@@ -1,4 +1,5 @@
-use proc_macro::{self, TokenStream, TokenTreeIter, Term, Spacing, TokenNode, Delimiter};
+use proc_macro::{self, TokenStream, TokenTree, Term, Spacing, Delimiter};
+use proc_macro::token_stream::IntoIter as TokenIter;
 use token::{Token, Keyword};
 use span::Span;
 
@@ -8,7 +9,7 @@ pub struct Cursor {
 }
 
 struct Frame {
-    iter: TokenTreeIter,
+    iter: TokenIter,
     span: Span,
     delimiter: Delimiter,
 }
@@ -37,22 +38,23 @@ impl Iterator for Cursor {
         let mut top = self.stack.pop()?;
         match top.iter.next() {
             Some(tt) => {
-                let span = Span(tt.span);
+                let span = Span(tt.span());
                 self.stack.push(top);
-                let token = match tt.kind {
-                    TokenNode::Group(delimiter, nested) => {
-                        let iter = nested.into_iter();
+                let token = match tt {
+                    TokenTree::Group(tt) => {
+                        let delimiter = tt.delimiter();
+                        let iter = tt.stream().into_iter();
                         self.stack.push(Frame { iter, span, delimiter });
                         Token::Open(delimiter)
                     }
-                    TokenNode::Op(op, spacing) => {
-                        if let Spacing::Joint = spacing {
+                    TokenTree::Op(tt) => {
+                        if let Spacing::Joint = tt.spacing() {
                             self.joint = Some(span);
                         }
-                        Token::Op(op)
+                        Token::Op(tt.op())
                     }
-                    TokenNode::Term(term) => term_to_token(term),
-                    TokenNode::Literal(lit) => Token::Literal(lit),
+                    TokenTree::Term(term) => term_to_token(term),
+                    TokenTree::Literal(lit) => Token::Literal(lit),
                 };
                 Some((span, token, span))
             }
