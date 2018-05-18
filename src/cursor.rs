@@ -1,5 +1,5 @@
 use proc_macro::token_stream::IntoIter as TokenIter;
-use proc_macro::{self, Delimiter, Spacing, Term, TokenStream, TokenTree};
+use proc_macro::{self, Delimiter, Spacing, Ident, TokenStream, TokenTree};
 use span::Span;
 use token::{Keyword, Token};
 
@@ -47,13 +47,13 @@ impl Iterator for Cursor {
                         self.stack.push(Frame { iter, span, delimiter });
                         Token::Open(delimiter)
                     }
-                    TokenTree::Op(tt) => {
+                    TokenTree::Punct(tt) => {
                         if let Spacing::Joint = tt.spacing() {
                             self.joint = Some(span);
                         }
-                        Token::Op(tt.op())
+                        Token::Punct(tt.as_char())
                     }
-                    TokenTree::Term(term) => term_to_token(term),
+                    TokenTree::Ident(ident) => ident_to_token(ident),
                     TokenTree::Literal(lit) => Token::Literal(lit),
                 };
                 Some((span, token, span))
@@ -67,8 +67,8 @@ impl Iterator for Cursor {
     }
 }
 
-fn term_to_token(term: Term) -> Token {
-    match term.as_str() {
+fn ident_to_token(ident: Ident) -> Token {
+    match &*ident.to_string() {
         "abstract" => Token::Keyword(Keyword::Abstract),
         "alignof" => Token::Keyword(Keyword::Alignof),
         "as" => Token::Keyword(Keyword::As),
@@ -121,10 +121,6 @@ fn term_to_token(term: Term) -> Token {
         "where" => Token::Keyword(Keyword::Where),
         "while" => Token::Keyword(Keyword::While),
         "yield" => Token::Keyword(Keyword::Yield),
-        other => if other.starts_with("'") {
-            Token::Lifetime(term)
-        } else {
-            Token::Ident(term)
-        },
+        _other => Token::Ident(ident),
     }
 }

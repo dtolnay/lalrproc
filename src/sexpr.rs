@@ -14,7 +14,7 @@ impl Display for Path {
     fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
         formatter.write_str("(Path")?;
         for segment in &self.segments {
-            write!(formatter, " {}", segment.term.as_str())?;
+            write!(formatter, " {}", segment)?;
         }
         formatter.write_str(")")
     }
@@ -24,7 +24,7 @@ impl Display for Reference {
     fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
         formatter.write_str("(Reference")?;
         if let Some(ref lifetime) = self.lifetime {
-            write!(formatter, " {}", lifetime.term.as_str())?;
+            write!(formatter, " '{}", lifetime.ident)?;
         }
         if self.mutable {
             formatter.write_str(" mut")?;

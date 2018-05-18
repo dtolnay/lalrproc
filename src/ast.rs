@@ -1,5 +1,7 @@
-use proc_macro::{Literal, Term};
+use proc_macro::Literal;
 use span::Span;
+
+pub use proc_macro::Ident;
 
 #[derive(Debug)]
 pub enum Type {
@@ -35,13 +37,7 @@ pub enum BinOp {
 }
 
 #[derive(Debug)]
-pub struct Ident {
-    pub term: Term,
-    pub span: Span,
-}
-
-#[derive(Debug)]
 pub struct Lifetime {
-    pub term: Term,
+    pub ident: Ident,
     pub span: Span,
 }

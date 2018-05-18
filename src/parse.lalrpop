@@ -1,4 +1,4 @@
-use ast::{Type, Path, Reference, Expr, BinOp, Ident, Lifetime};
+use ast::{Type, Path, Reference, Expr, BinOp, Lifetime};
 use error::NoUserError;
 use token::Token;
 use span::Span;
@@ -16,21 +16,21 @@ extern {
         ")" => Token::Close(::proc_macro::Delimiter::Parenthesis),
 
         // The punctuation needed by our grammar
-        "+" => Token::Op('+'),
-        "-" => Token::Op('-'),
-        "*" => Token::Op('*'),
-        "/" => Token::Op('/'),
-        "&" => Token::Op('&'),
-        ":" => Token::Op(':'),
-        Op => Token::Op(<char>),
+        "+" => Token::Punct('+'),
+        "-" => Token::Punct('-'),
+        "*" => Token::Punct('*'),
+        "/" => Token::Punct('/'),
+        "&" => Token::Punct('&'),
+        ":" => Token::Punct(':'),
+        "'" => Token::Punct('\''),
+        Punct => Token::Punct(<char>),
         Joint => Token::Joint,
 
         // The keywords needed by our grammar
         "mut" => Token::Keyword(::token::Keyword::Mut),
 
         // Other terminals in the grammar
-        BasicIdent => Token::Ident(<::proc_macro::Term>),
-        BasicLifetime => Token::Lifetime(<::proc_macro::Term>),
+        Ident => Token::Ident(<::proc_macro::Ident>),
         Literal => Token::Literal(<Literal>),
     }
 }
@@ -83,10 +83,6 @@ Component: Box<Expr> = {
     "(" <Expr> ")",
 };
 
-Ident: Ident = {
-    <span:@L> <term:BasicIdent> => Ident {<>}
-};
-
 Lifetime: Lifetime = {
-    <span:@L> <term:BasicLifetime> => Lifetime {<>}
+    <span:@L> "'" Joint <ident:Ident> => Lifetime { span, ident },
 };

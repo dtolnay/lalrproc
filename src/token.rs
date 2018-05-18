@@ -1,15 +1,14 @@
-use proc_macro::{Delimiter, Literal, Term};
+use proc_macro::{Delimiter, Literal, Ident};
 use std::fmt::{self, Display};
 
 #[derive(Debug)]
 pub enum Token {
     Open(Delimiter),
     Close(Delimiter),
-    Op(char),
+    Punct(char),
     Joint,
     Keyword(Keyword),
-    Ident(Term),
-    Lifetime(Term),
+    Ident(Ident),
     Literal(Literal),
 }
 
@@ -34,10 +33,10 @@ impl Display for Token {
             Token::Close(Delimiter::Brace) => formatter.write_str("`}`"),
             Token::Close(Delimiter::Bracket) => formatter.write_str("`]`"),
             Token::Close(Delimiter::None) => formatter.write_str("None-delimiter"),
-            Token::Op(op) => write!(formatter, "`{}`", op),
+            Token::Punct(ch) => write!(formatter, "`{}`", ch),
             Token::Joint => formatter.write_str("joint-op"),
             Token::Keyword(ref keyword) => keyword.fmt(formatter),
-            Token::Ident(term) | Token::Lifetime(term) => write!(formatter, "`{}`", term.as_str()),
+            Token::Ident(ref ident) => write!(formatter, "`{}`", ident),
             Token::Literal(ref lit) => write!(formatter, "`{}`", lit),
         }
     }
