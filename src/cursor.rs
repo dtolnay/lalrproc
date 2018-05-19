@@ -1,5 +1,5 @@
 use proc_macro::token_stream::IntoIter as TokenIter;
-use proc_macro::{self, Delimiter, Spacing, Ident, TokenStream, TokenTree};
+use proc_macro::{self, Delimiter, Ident, Spacing, TokenStream, TokenTree};
 use span::Span;
 use token::{Keyword, Token};
 
@@ -44,7 +44,11 @@ impl Iterator for Cursor {
                     TokenTree::Group(tt) => {
                         let delimiter = tt.delimiter();
                         let iter = tt.stream().into_iter();
-                        self.stack.push(Frame { iter, span, delimiter });
+                        self.stack.push(Frame {
+                            iter,
+                            span,
+                            delimiter,
+                        });
                         Token::Open(delimiter)
                     }
                     TokenTree::Punct(tt) => {

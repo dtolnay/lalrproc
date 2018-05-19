@@ -24,7 +24,8 @@ pub fn emit(err: ParseError<Span, Token, NoUserError>) {
             token: Some((span, token, _)),
             expected,
         } => {
-            let mut diagnostic = span.0
+            let mut diagnostic = span
+                .0
                 .error("failed to parse macro input")
                 .note(format!("unrecognized token {}", token));
             if !expected.is_empty() {
@@ -37,7 +38,8 @@ pub fn emit(err: ParseError<Span, Token, NoUserError>) {
             expected,
         } => {
             let span = proc_macro::Span::call_site();
-            let mut diagnostic = span.error("failed to parse macro input")
+            let mut diagnostic = span
+                .error("failed to parse macro input")
                 .note("unexpected EOF");
             if !expected.is_empty() {
                 diagnostic = diagnostic.note(Expected(&expected).to_string());
@@ -91,7 +93,9 @@ impl<'a> Display for GrammarRule<'a> {
             "BasicLifetime" => formatter.write_str("lifetime"),
             "Literal" => formatter.write_str("literal"),
             s => {
-                if s.len() > 2 && s.starts_with('"') && s.ends_with('"')
+                if s.len() > 2
+                    && s.starts_with('"')
+                    && s.ends_with('"')
                     && !s[1..s.len() - 1].contains('"')
                 {
                     write!(formatter, "`{}`", &s[1..s.len() - 1])
