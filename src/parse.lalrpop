@@ -1,3 +1,5 @@
+#![cfg_attr(feature = "cargo-clippy", allow(clippy, clippy_pedantic))]
+
 use ast::{Type, Path, Reference, Expr, BinOp, Lifetime};
 use error::NoUserError;
 use token::Token;
