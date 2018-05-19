@@ -1,5 +1,7 @@
 #![feature(proc_macro)]
 
+#![cfg_attr(feature = "cargo-clippy", deny(clippy, clippy_pedantic))]
+
 extern crate lalrpop_util;
 extern crate proc_macro;
 
