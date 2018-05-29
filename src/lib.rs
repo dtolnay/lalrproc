@@ -45,6 +45,6 @@ fn string_literal(s: &str) -> TokenStream {
 
 fn parse_error(err: ParseError<Span, Token, NoUserError>) -> TokenStream {
     error::emit(err);
-    let group = Group::new(Delimiter::Brace, TokenStream::empty());
+    let group = Group::new(Delimiter::Brace, TokenStream::new());
     TokenStream::from_iter(iter::once(TokenTree::Group(group)))
 }
