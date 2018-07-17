@@ -8,10 +8,15 @@ extern crate proc_macro;
 mod ast;
 mod cursor;
 mod error;
-mod parse;
 mod sexpr;
 mod span;
 mod token;
+
+mod parse {
+    #![cfg_attr(feature = "cargo-clippy", allow(clippy, clippy_pedantic))]
+
+    include!(concat!(env!("OUT_DIR"), "/parse.rs"));
+}
 
 use cursor::Cursor;
 use error::NoUserError;
