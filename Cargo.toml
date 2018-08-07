@@ -16,3 +16,6 @@ lalrpop = "0.15"
 
 [dependencies]
 lalrpop-util = "0.15"
+
+[badges]
+travis-ci = { repository = "dtolnay/lalrproc" }
