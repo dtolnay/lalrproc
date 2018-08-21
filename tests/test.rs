@@ -1,4 +1,4 @@
-#![feature(proc_macro_non_items, use_extern_macros)]
+#![feature(proc_macro_non_items)]
 
 extern crate lalrproc;
 use lalrproc::{s_expr, s_type};
