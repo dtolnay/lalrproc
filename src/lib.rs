@@ -6,7 +6,7 @@
         empty_enum,
         indexing_slicing,
         match_same_arms,
-        stutter,
+        module_name_repetitions,
         use_self
     )
 )]
