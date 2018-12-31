@@ -2,7 +2,6 @@
 #![deny(clippy::all, clippy::pedantic)]
 #![allow(
     clippy::empty_enum,
-    clippy::indexing_slicing,
     clippy::match_same_arms,
     clippy::module_name_repetitions,
     clippy::use_self
