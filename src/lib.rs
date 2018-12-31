@@ -1,14 +1,11 @@
 #![feature(proc_macro_diagnostic)]
-#![cfg_attr(feature = "cargo-clippy", deny(clippy, clippy_pedantic))]
-#![cfg_attr(
-    feature = "cargo-clippy",
-    allow(
-        empty_enum,
-        indexing_slicing,
-        match_same_arms,
-        module_name_repetitions,
-        use_self
-    )
+#![deny(clippy::all, clippy::pedantic)]
+#![allow(
+    clippy::empty_enum,
+    clippy::indexing_slicing,
+    clippy::match_same_arms,
+    clippy::module_name_repetitions,
+    clippy::use_self,
 )]
 
 extern crate lalrpop_util;
@@ -22,7 +19,7 @@ mod span;
 mod token;
 
 mod parse {
-    #![cfg_attr(feature = "cargo-clippy", allow(clippy, clippy_pedantic))]
+    #![allow(clippy::all, clippy::pedantic)]
 
     include!(concat!(env!("OUT_DIR"), "/parse.rs"));
 }

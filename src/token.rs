@@ -14,7 +14,7 @@ pub enum Token {
 
 // From https://doc.rust-lang.org/grammar.html#keywords
 #[derive(Debug)]
-#[cfg_attr(rustfmt, rustfmt_skip)]
+#[rustfmt::skip]
 pub enum Keyword {
     Abstract, Alignof, As, Become, Box, Break, Const, Continue, Crate, Do, Else,
     Enum, Extern, False, Final, Fn, For, If, Impl, In, Let, Loop, Macro, Match,
