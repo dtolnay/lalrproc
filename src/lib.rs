@@ -5,7 +5,7 @@
     clippy::indexing_slicing,
     clippy::match_same_arms,
     clippy::module_name_repetitions,
-    clippy::use_self,
+    clippy::use_self
 )]
 
 extern crate lalrpop_util;

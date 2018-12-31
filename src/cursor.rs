@@ -62,11 +62,13 @@ impl Iterator for Cursor {
                 };
                 Some((span, token, span))
             }
-            None => if self.stack.is_empty() {
-                None
-            } else {
-                Some((top.span, Token::Close(top.delimiter), top.span))
-            },
+            None => {
+                if self.stack.is_empty() {
+                    None
+                } else {
+                    Some((top.span, Token::Close(top.delimiter), top.span))
+                }
+            }
         }
     }
 }
