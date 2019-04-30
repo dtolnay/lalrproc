@@ -15,7 +15,6 @@ to a string literal S-expression representation of the Rust expression or type
 given in the input.
 
 ```rust
-extern crate lalrproc;
 use lalrproc::{s_expr, s_type};
 
 fn main() {

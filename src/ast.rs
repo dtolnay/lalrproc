@@ -1,5 +1,5 @@
+use crate::span::Span;
 use proc_macro::Literal;
-use span::Span;
 
 pub use proc_macro::Ident;
 

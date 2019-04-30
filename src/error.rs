@@ -1,8 +1,7 @@
+use crate::span::Span;
+use crate::token::Token;
 use lalrpop_util::ParseError;
-use proc_macro;
-use span::Span;
 use std::fmt::{self, Display};
-use token::Token;
 
 pub enum NoUserError {}
 

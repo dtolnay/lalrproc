@@ -1,7 +1,7 @@
+use crate::span::Span;
+use crate::token::{Keyword, Token};
 use proc_macro::token_stream::IntoIter as TokenIter;
 use proc_macro::{self, Delimiter, Ident, Spacing, TokenStream, TokenTree};
-use span::Span;
-use token::{Keyword, Token};
 
 pub struct Cursor {
     stack: Vec<Frame>,

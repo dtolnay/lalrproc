@@ -1,7 +1,7 @@
-use ast::{Type, Path, Reference, Expr, BinOp, Lifetime};
-use error::NoUserError;
-use token::Token;
-use span::Span;
+use crate::ast::{Type, Path, Reference, Expr, BinOp, Lifetime};
+use crate::error::NoUserError;
+use crate::token::Token;
+use crate::span::Span;
 use proc_macro::Literal;
 
 grammar;
@@ -12,8 +12,8 @@ extern {
 
     enum Token {
         // The delimiters needed by our grammar
-        "(" => Token::Open(::proc_macro::Delimiter::Parenthesis),
-        ")" => Token::Close(::proc_macro::Delimiter::Parenthesis),
+        "(" => Token::Open(proc_macro::Delimiter::Parenthesis),
+        ")" => Token::Close(proc_macro::Delimiter::Parenthesis),
 
         // The punctuation needed by our grammar
         "+" => Token::Punct('+'),
@@ -27,10 +27,10 @@ extern {
         Joint => Token::Joint,
 
         // The keywords needed by our grammar
-        "mut" => Token::Keyword(::token::Keyword::Mut),
+        "mut" => Token::Keyword(crate::token::Keyword::Mut),
 
         // Other terminals in the grammar
-        Ident => Token::Ident(<::proc_macro::Ident>),
+        Ident => Token::Ident(<proc_macro::Ident>),
         Literal => Token::Literal(<Literal>),
     }
 }

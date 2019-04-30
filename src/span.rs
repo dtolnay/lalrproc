@@ -1,5 +1,3 @@
-use proc_macro;
-
 #[derive(Copy, Clone, Debug)]
 pub struct Span(pub proc_macro::Span);
 

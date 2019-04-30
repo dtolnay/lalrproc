@@ -1,6 +1,5 @@
 #![feature(proc_macro_hygiene)]
 
-extern crate lalrproc;
 use lalrproc::{s_expr, s_type};
 
 #[test]

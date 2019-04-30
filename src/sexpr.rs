@@ -1,4 +1,4 @@
-use ast::*;
+use crate::ast::*;
 use std::fmt::{self, Display};
 
 impl Display for Type {

@@ -7,7 +7,6 @@
     clippy::use_self
 )]
 
-extern crate lalrpop_util;
 extern crate proc_macro;
 
 mod ast;
@@ -23,14 +22,14 @@ mod parse {
     include!(concat!(env!("OUT_DIR"), "/parse.rs"));
 }
 
-use cursor::Cursor;
-use error::NoUserError;
+use crate::cursor::Cursor;
+use crate::error::NoUserError;
+use crate::parse::{ExprParser, TypeParser};
+use crate::span::Span;
+use crate::token::Token;
 use lalrpop_util::ParseError;
-use parse::{ExprParser, TypeParser};
 use proc_macro::{Delimiter, Group, Literal, TokenStream, TokenTree};
-use span::Span;
 use std::iter::{self, FromIterator};
-use token::Token;
 
 #[proc_macro]
 pub fn s_type(input: TokenStream) -> TokenStream {
