@@ -12,10 +12,10 @@ build = "build.rs"
 proc-macro = true
 
 [build-dependencies]
-lalrpop = "0.15"
+lalrpop = "0.16"
 
 [dependencies]
-lalrpop-util = "0.15"
+lalrpop-util = "0.16"
 
 [badges]
 travis-ci = { repository = "dtolnay/lalrproc" }

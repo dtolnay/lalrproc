@@ -1,7 +1,7 @@
 use proc_macro::{Delimiter, Ident, Literal};
 use std::fmt::{self, Display};
 
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 pub enum Token {
     Open(Delimiter),
     Close(Delimiter),
@@ -13,7 +13,7 @@ pub enum Token {
 }
 
 // From https://doc.rust-lang.org/grammar.html#keywords
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 #[rustfmt::skip]
 pub enum Keyword {
     Abstract, Alignof, As, Become, Box, Break, Const, Continue, Crate, Do, Else,
