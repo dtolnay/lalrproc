@@ -8,6 +8,7 @@ description = "Procedural macro built on LALRPOP"
 repository = "https://github.com/dtolnay/lalrproc"
 documentation = "https://github.com/dtolnay/lalrproc"
 build = "build.rs"
+readme = "README.md"
 
 [lib]
 proc-macro = true
