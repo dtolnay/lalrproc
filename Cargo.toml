@@ -21,3 +21,6 @@ lalrpop-util = "0.16"
 
 [badges]
 travis-ci = { repository = "dtolnay/lalrproc" }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
