@@ -14,10 +14,10 @@ readme = "README.md"
 proc-macro = true
 
 [build-dependencies]
-lalrpop = "0.16"
+lalrpop = "0.19"
 
 [dependencies]
-lalrpop-util = "0.16"
+lalrpop-util = "0.19"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
