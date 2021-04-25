@@ -7,6 +7,7 @@
 #![feature(proc_macro_diagnostic)]
 #![allow(
     clippy::empty_enum,
+    clippy::from_iter_instead_of_collect,
     clippy::match_same_arms,
     clippy::module_name_repetitions,
     clippy::use_self,
