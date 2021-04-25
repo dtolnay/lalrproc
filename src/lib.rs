@@ -36,7 +36,6 @@ use crate::span::Span;
 use crate::token::Token;
 use lalrpop_util::ParseError;
 use proc_macro::{Delimiter, Group, Literal, TokenStream, TokenTree};
-use std::iter::{self, FromIterator};
 
 #[proc_macro]
 pub fn s_type(input: TokenStream) -> TokenStream {
@@ -56,11 +55,11 @@ pub fn s_expr(input: TokenStream) -> TokenStream {
 
 fn string_literal(s: &str) -> TokenStream {
     let lit = Literal::string(s);
-    TokenStream::from_iter(iter::once(TokenTree::Literal(lit)))
+    TokenStream::from(TokenTree::Literal(lit))
 }
 
 fn parse_error(err: ParseError<Span, Token, NoUserError>) -> TokenStream {
     error::emit(err);
     let group = Group::new(Delimiter::Brace, TokenStream::new());
-    TokenStream::from_iter(iter::once(TokenTree::Group(group)))
+    TokenStream::from(TokenTree::Group(group))
 }
