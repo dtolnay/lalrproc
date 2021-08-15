@@ -12,6 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: dtolnay/rust-toolchain@nightly
+        with:
+          # https://github.com/rust-lang/rust/issues/88043
+          toolchain: nightly-2021-08-14
       - run: cargo test
 
   clippy:
@@ -21,3 +24,5 @@ jobs:
       - uses: actions/checkout@v2
       - uses: dtolnay/rust-toolchain@clippy
       - run: cargo clippy -- -Dclippy::all -Dclippy::pedantic
+        # https://github.com/rust-lang/rust/issues/88043
+        continue-on-error: true
