@@ -1,6 +1,6 @@
 [package]
 name = "lalrproc"
-version = "0.0.7"
+version = "0.0.8"
 authors = ["David Tolnay <dtolnay@gmail.com>"]
 description = "Procedural macro built on LALRPOP"
 documentation = "https://github.com/dtolnay/lalrproc"
