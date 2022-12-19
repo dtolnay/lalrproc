@@ -2,13 +2,13 @@
 name = "lalrproc"
 version = "0.0.7"
 authors = ["David Tolnay <dtolnay@gmail.com>"]
+build = "build.rs"
+description = "Procedural macro built on LALRPOP"
+documentation = "https://github.com/dtolnay/lalrproc"
 edition = "2018"
 license = "MIT OR Apache-2.0"
-description = "Procedural macro built on LALRPOP"
-repository = "https://github.com/dtolnay/lalrproc"
-documentation = "https://github.com/dtolnay/lalrproc"
-build = "build.rs"
 readme = "README.md"
+repository = "https://github.com/dtolnay/lalrproc"
 
 [lib]
 proc-macro = true
