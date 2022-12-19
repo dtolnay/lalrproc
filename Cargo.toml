@@ -6,7 +6,6 @@ description = "Procedural macro built on LALRPOP"
 documentation = "https://github.com/dtolnay/lalrproc"
 edition = "2018"
 license = "MIT OR Apache-2.0"
-readme = "README.md"
 repository = "https://github.com/dtolnay/lalrproc"
 
 [lib]
