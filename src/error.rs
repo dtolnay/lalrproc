@@ -26,7 +26,7 @@ pub fn emit(err: ParseError<Span, Token, NoUserError>) {
             let mut diagnostic = span
                 .0
                 .error("failed to parse macro input")
-                .note(format!("unrecognized token {}", token));
+                .note(format!("unrecognized token {token}"));
             if !expected.is_empty() {
                 diagnostic = diagnostic.note(Expected(&expected).to_string());
             }
@@ -50,7 +50,7 @@ pub fn emit(err: ParseError<Span, Token, NoUserError>) {
         } => {
             span.0
                 .error("failed to parse macro input")
-                .note(format!("extra token {}", token))
+                .note(format!("extra token {token}"))
                 .emit();
         }
         ParseError::User { error } => match error {},

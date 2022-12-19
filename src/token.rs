@@ -34,11 +34,11 @@ impl Display for Token {
             Token::Close(Delimiter::Brace) => formatter.write_str("`}`"),
             Token::Close(Delimiter::Bracket) => formatter.write_str("`]`"),
             Token::Close(Delimiter::None) => formatter.write_str("None-delimiter"),
-            Token::Punct(ch) => write!(formatter, "`{}`", ch),
+            Token::Punct(ch) => write!(formatter, "`{ch}`"),
             Token::Joint => formatter.write_str("joint-op"),
             Token::Keyword(ref keyword) => keyword.fmt(formatter),
-            Token::Ident(ref ident) => write!(formatter, "`{}`", ident),
-            Token::Literal(ref lit) => write!(formatter, "`{}`", lit),
+            Token::Ident(ref ident) => write!(formatter, "`{ident}`"),
+            Token::Literal(ref lit) => write!(formatter, "`{lit}`"),
         }
     }
 }

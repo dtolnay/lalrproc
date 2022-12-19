@@ -14,7 +14,7 @@ impl Display for Path {
     fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
         formatter.write_str("(Path")?;
         for segment in &self.segments {
-            write!(formatter, " {}", segment)?;
+            write!(formatter, " {segment}")?;
         }
         formatter.write_str(")")
     }
@@ -39,7 +39,7 @@ impl Display for Expr {
             Expr::Path(ref path) => path.fmt(formatter),
             Expr::Lit(ref lit) => lit.fmt(formatter),
             Expr::Binary(ref left, ref op, ref right) => {
-                write!(formatter, "({} {} {})", op, left, right)
+                write!(formatter, "({op} {left} {right})")
             }
         }
     }
