@@ -2,7 +2,7 @@ LALRPOP parser for procedural macro input
 =========================================
 
 [<img alt="github" src="https://img.shields.io/badge/github-dtolnay/lalrproc-8da0cb?style=for-the-badge&labelColor=555555&logo=github" height="20">](https://github.com/dtolnay/lalrproc)
-[<img alt="build status" src="https://img.shields.io/github/workflow/status/dtolnay/lalrproc/CI/master?style=for-the-badge" height="20">](https://github.com/dtolnay/lalrproc/actions?query=branch%3Amaster)
+[<img alt="build status" src="https://img.shields.io/github/actions/workflow/status/dtolnay/lalrproc/ci.yml?branch=master&style=for-the-badge" height="20">](https://github.com/dtolnay/lalrproc/actions?query=branch%3Amaster)
 
 This crate demostrates a proof of concept of using the [LALRPOP] parser
 generator framework to parse input tokens in a Rust procedural macro.
